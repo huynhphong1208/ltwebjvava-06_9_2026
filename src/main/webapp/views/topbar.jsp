@@ -4,20 +4,13 @@
 <style>
     .navbar {
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         align-items: center;
         background-color: #ffffff;
         padding: 0.75rem 2rem;
         box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
         border-bottom: 1px solid #e2e8f0;
         margin-bottom: 2rem;
-    }
-    .nav-brand a {
-        font-size: 1.25rem;
-        font-weight: 700;
-        color: #2563eb;
-        text-decoration: none;
-        letter-spacing: -0.025em;
     }
     .nav-links {
         display: flex;
@@ -55,9 +48,6 @@
 </style>
 
 <div class="navbar">
-    <div class="nav-brand">
-        <a href="${pageContext.request.contextPath}/waiting">AppDemo</a>
-    </div>
     <div class="nav-links">
         <c:choose>
             <c:when test="${sessionScope.account == null}">

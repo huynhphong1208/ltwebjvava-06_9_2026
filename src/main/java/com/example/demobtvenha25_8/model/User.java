@@ -1,19 +1,40 @@
 package com.example.demobtvenha25_8.model;
 
+import jakarta.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
 
+@Entity
+@Table(name = "`User`")
 public class User implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column(name = "email")
     private String email;
+
+    @Column(name = "username", unique = true)
     private String userName;
+
+    @Column(name = "fullname")
     private String fullName;
+
+    @Column(name = "password")
     private String password;
+
+    @Column(name = "avatar")
     private String avatar;
+
+    @Column(name = "roleid")
     private int roleid;
+
+    @Column(name = "phone")
     private String phone;
+
+    @Column(name = "createddate")
     private Date createdDate;
 
     public User() {}

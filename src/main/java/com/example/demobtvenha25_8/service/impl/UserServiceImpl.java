@@ -2,11 +2,14 @@ package com.example.demobtvenha25_8.service.impl;
 
 import com.example.demobtvenha25_8.dao.UserDAO;
 import com.example.demobtvenha25_8.dao.impl.UserDaoImpl;
+import com.example.demobtvenha25_8.dao.jpa.UserJpaDao;
+import com.example.demobtvenha25_8.dao.jpa.impl.UserJpaDaoImpl;
 import com.example.demobtvenha25_8.model.User;
 import com.example.demobtvenha25_8.service.UserService;
 
 public class UserServiceImpl implements UserService {
     private UserDAO userDao = new UserDaoImpl();
+    private UserJpaDao userJpaDao = new UserJpaDaoImpl();
 
     @Override
     public User login(String username, String password) {
@@ -19,13 +22,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User get(String username) {
-        return userDao.get(username);
+        return userJpaDao.findByUsername(username);
     }
 
     @Override
     public boolean register(String username, String password, String email, String fullname, String phone) {
         // 1. Kiểm tra tài khoản đã tồn tại chưa
-        if (userDao.checkExistUsername(username)) {
+        if (userJpaDao.existsByUsername(username)) {
             return false;
         }
 
@@ -42,7 +45,12 @@ public class UserServiceImpl implements UserService {
         newUser.setRoleid(3); // Mặc định là User
         newUser.setCreatedDate(date);
 
-        userDao.insert(newUser);
+        userJpaDao.save(newUser);
         return true;
+    }
+
+    @Override
+    public void update(User user) {
+        userJpaDao.update(user);
     }
 }

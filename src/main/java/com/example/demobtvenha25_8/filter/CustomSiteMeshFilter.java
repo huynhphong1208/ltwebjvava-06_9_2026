@@ -12,13 +12,13 @@ public class CustomSiteMeshFilter extends ConfigurableSiteMeshFilter {
         builder
                 // Đặt prefix rỗng để không bị tự động nối chuỗi lặp /WEB-INF/decorators/
                 .setDecoratorPrefix("")
-                
+
                 // Quản trị Category Decorator
                 .addDecoratorPath("/admin/*", "/WEB-INF/decorators/admin.jsp")
-                
+
                 // Giao diện chung người dùng Decorator
                 .addDecoratorPath("/*", "/WEB-INF/decorators/web.jsp")
-                
+
                 // Loại trừ các đường dẫn không bọc decorator
                 .addExcludedPath("/WEB-INF/*")
                 .addExcludedPath("/views/login.jsp")

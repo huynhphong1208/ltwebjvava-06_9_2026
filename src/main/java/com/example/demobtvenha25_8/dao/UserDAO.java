@@ -6,4 +6,5 @@ public interface UserDAO {
     User get(String username);
     boolean checkExistUsername(String username);
     void insert(User user);
+    void update(User user);
 }

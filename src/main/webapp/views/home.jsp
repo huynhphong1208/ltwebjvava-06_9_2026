@@ -49,25 +49,40 @@
         }
         .status-badge {
             display: inline-block;
-            background-color: #dcfce7;
-            color: #15803d;
+            background-color: #dbeafe;
+            color: #1e40af;
             font-weight: 600;
             padding: 0.5rem 1rem;
             border-radius: 9999px;
             font-size: 0.875rem;
             margin-bottom: 1.5rem;
-            border: 1px solid #bbf7d0;
+            border: 1px solid #bfdbfe;
+        }
+        .btn-manage {
+            display: inline-block;
+            margin-top: 1.5rem;
+            padding: 0.75rem 1.5rem;
+            background-color: #2563eb;
+            color: #ffffff;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background-color 0.2s ease;
+        }
+        .btn-manage:hover {
+            background-color: #1d4ed8;
         }
     </style>
 </head>
 <body>
-    <jsp:include page="topbar.jsp"/>
-    
     <div class="main-container">
         <div class="welcome-card">
-            <span class="status-badge">Thành viên Thường</span>
-            <h1>Chào mừng bạn đến với hệ thống!</h1>
-            <p>Trải nghiệm dịch vụ và các tiện ích dành riêng cho thành viên đã đăng ký tài khoản.</p>
+            <span class="status-badge">Quản Trị Hệ Thống (ADMIN)</span>
+            <h1>Trang Quản Trị Hệ Thống</h1>
+            <p>Chào mừng Admin! Bạn có thể quản lý danh sách danh mục sản phẩm từ liên kết bên dưới.</p>
+            <a class="btn-manage" href="${pageContext.request.contextPath}/admin/category/list">
+                Đến Quản lý Category
+            </a>
         </div>
     </div>
 </body>

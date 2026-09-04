@@ -138,6 +138,21 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- =====================================================
+             10. SiteMesh 3.2.x - Hỗ trợ Jakarta EE 10 / Tomcat 10+
+             ===================================================== -->
+        <dependency>
+            <groupId>org.sitemesh</groupId>
+            <artifactId>sitemesh</artifactId>
+            <version>3.2.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.sitemesh</groupId>
+            <artifactId>sitemesh-webfilter</artifactId>
+            <version>3.2.1</version>
+        </dependency>
+
     </dependencies>
 
     <build>

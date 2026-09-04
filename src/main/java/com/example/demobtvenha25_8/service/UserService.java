@@ -6,4 +6,5 @@ public interface UserService {
     User login(String username, String password);
     User get(String username);
     boolean register(String username, String password, String email, String fullname, String phone);
+    void update(User user);
 }
