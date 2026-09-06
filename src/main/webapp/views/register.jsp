@@ -6,146 +6,122 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đăng ký tài khoản</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Inter', sans-serif;
-        }
         body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
             min-height: 100vh;
-            color: #333;
-            padding: 20px 0;
+            display: flex;
+            align-items: center;
+            padding: 2rem 0;
         }
-        .register-container {
-            background-color: #ffffff;
-            padding: 2.5rem;
-            border-radius: 16px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-            width: 100%;
-            max-width: 450px;
-        }
-        h2 {
-            font-weight: 700;
-            font-size: 1.75rem;
-            margin-bottom: 1.5rem;
-            color: #1e293b;
-            text-align: center;
-        }
-        .alert-error {
-            background-color: #fee2e2;
-            color: #b91c1c;
-            padding: 0.75rem 1rem;
-            border-radius: 8px;
-            margin-bottom: 1.25rem;
-            font-size: 0.875rem;
-            border: 1px solid #fca5a5;
-            text-align: center;
-        }
-        .form-group {
-            margin-bottom: 1.25rem;
-        }
-        label {
-            display: block;
-            font-size: 0.875rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: #475569;
-        }
-        input {
-            width: 100%;
-            padding: 0.75rem 1rem;
-            border: 1px solid #cbd5e1;
-            border-radius: 8px;
-            font-size: 0.95rem;
-            outline: none;
-            transition: all 0.2s ease;
-        }
-        input:focus {
-            border-color: #2563eb;
-            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
-        }
-        button {
-            width: 100%;
-            padding: 0.75rem;
-            background-color: #2563eb;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background-color 0.2s ease, transform 0.1s ease;
-            margin-top: 0.5rem;
-            margin-bottom: 1rem;
-        }
-        button:hover {
-            background-color: #1d4ed8;
-        }
-        button:active {
-            transform: scale(0.98);
-        }
-        .footer-links {
-            text-align: center;
-        }
-        .footer-links a {
-            color: #2563eb;
-            text-decoration: none;
-            font-size: 0.875rem;
-            font-weight: 500;
-            transition: color 0.2s ease;
-        }
-        .footer-links a:hover {
-            color: #1d4ed8;
-            text-decoration: underline;
+        .register-card {
+            border-radius: 1rem;
+            box-shadow: 0 1rem 3rem rgba(0,0,0,0.1);
         }
     </style>
 </head>
 <body>
-    <div class="register-container">
-        <h2>Đăng Ký Tài Khoản</h2>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6 col-xl-5">
+                <div class="card register-card border-0">
+                    <div class="card-body p-4 p-md-5">
+                        <div class="text-center mb-4">
+                            <h2 class="fw-bold text-dark"><i class="bi bi-person-plus me-2 text-primary"></i>Đăng Ký Tài Khoản</h2>
+                        </div>
 
-        <c:if test="${not empty alert}">
-            <div class="alert-error">
-                ${alert}
-            </div>
-        </c:if>
+                        <c:if test="${not empty alert}">
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <i class="bi bi-exclamation-triangle-fill me-2"></i>${alert}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        </c:if>
 
-        <form action="${pageContext.request.contextPath}/register" method="post">
-            <div class="form-group">
-                <label for="username">Tài khoản (*)</label>
-                <input type="text" id="username" name="username" placeholder="Nhập tên tài khoản..." required />
+                        <form action="${pageContext.request.contextPath}/register" method="post" class="needs-validation" novalidate>
+                            <div class="mb-3">
+                                <label for="username" class="form-label fw-semibold">Tài khoản <span class="text-danger">*</span></label>
+                                <div class="input-group has-validation">
+                                    <span class="input-group-text"><i class="bi bi-person"></i></span>
+                                    <input type="text" class="form-control" id="username" name="username" placeholder="Nhập tên tài khoản..." required />
+                                    <div class="invalid-feedback">Vui lòng nhập tài khoản.</div>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="password" class="form-label fw-semibold">Mật khẩu <span class="text-danger">*</span></label>
+                                <div class="input-group has-validation">
+                                    <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                                    <input type="password" class="form-control" id="password" name="password" placeholder="Nhập mật khẩu..." required />
+                                    <div class="invalid-feedback">Vui lòng nhập mật khẩu.</div>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="fullname" class="form-label fw-semibold">Họ và tên <span class="text-danger">*</span></label>
+                                <div class="input-group has-validation">
+                                    <span class="input-group-text"><i class="bi bi-person-vcard"></i></span>
+                                    <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Nhập họ và tên..." required />
+                                    <div class="invalid-feedback">Vui lòng nhập họ và tên.</div>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="email" class="form-label fw-semibold">Email <span class="text-danger">*</span></label>
+                                <div class="input-group has-validation">
+                                    <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="Nhập địa chỉ email..." required />
+                                    <div class="invalid-feedback">Vui lòng nhập một email hợp lệ.</div>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label for="phone" class="form-label fw-semibold">Số điện thoại</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="bi bi-telephone"></i></span>
+                                    <input type="text" class="form-control" id="phone" name="phone" placeholder="Nhập số điện thoại..." />
+                                </div>
+                            </div>
+                            
+                            <div class="d-grid mb-3">
+                                <button type="submit" class="btn btn-primary btn-lg fw-semibold">Đăng ký</button>
+                            </div>
+                            
+                            <div class="text-center">
+                                <span class="text-muted small">Đã có tài khoản?</span>
+                                <a href="${pageContext.request.contextPath}/login" class="text-decoration-none small fw-semibold">Đăng nhập</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="password">Mật khẩu (*)</label>
-                <input type="password" id="password" name="password" placeholder="Nhập mật khẩu..." required />
-            </div>
-            <div class="form-group">
-                <label for="fullname">Họ và tên (*)</label>
-                <input type="text" id="fullname" name="fullname" placeholder="Nhập họ và tên..." required />
-            </div>
-            <div class="form-group">
-                <label for="email">Email (*)</label>
-                <input type="email" id="email" name="email" placeholder="Nhập địa chỉ email..." required />
-            </div>
-            <div class="form-group">
-                <label for="phone">Số điện thoại</label>
-                <input type="text" id="phone" name="phone" placeholder="Nhập số điện thoại..." />
-            </div>
-            <button type="submit">Đăng ký</button>
-        </form>
-
-        <div class="footer-links">
-            <a href="${pageContext.request.contextPath}/login">Đã có tài khoản? Đăng nhập</a>
         </div>
     </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    
+    <!-- Form Validation Script -->
+    <script>
+        (() => {
+            'use strict'
+            const forms = document.querySelectorAll('.needs-validation')
+            Array.from(forms).forEach(form => {
+                form.addEventListener('submit', event => {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+                    form.classList.add('was-validated')
+                }, false)
+            })
+        })()
+    </script>
 </body>
 </html>

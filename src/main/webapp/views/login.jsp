@@ -6,169 +6,105 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đăng Nhập</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Inter', sans-serif;
-        }
         body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
             min-height: 100vh;
-            color: #333;
-        }
-        .login-container {
-            background-color: #ffffff;
-            padding: 2.5rem;
-            border-radius: 16px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-            width: 100%;
-            max-width: 400px;
-            transition: transform 0.2s ease;
-        }
-        h2 {
-            font-weight: 700;
-            font-size: 1.75rem;
-            margin-bottom: 1.5rem;
-            color: #1e293b;
-            text-align: center;
-        }
-        .alert-error {
-            background-color: #fee2e2;
-            color: #b91c1c;
-            padding: 0.75rem 1rem;
-            border-radius: 8px;
-            margin-bottom: 1.25rem;
-            font-size: 0.875rem;
-            border: 1px solid #fca5a5;
-            text-align: center;
-        }
-        .alert-success {
-            background-color: #dcfce7;
-            color: #15803d;
-            padding: 0.75rem 1rem;
-            border-radius: 8px;
-            margin-bottom: 1.25rem;
-            font-size: 0.875rem;
-            border: 1px solid #86efac;
-            text-align: center;
-        }
-        .form-group {
-            margin-bottom: 1.25rem;
-        }
-        label {
-            display: block;
-            font-size: 0.875rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: #475569;
-        }
-        input[type="text"],
-        input[type="password"] {
-            width: 100%;
-            padding: 0.75rem 1rem;
-            border: 1px solid #cbd5e1;
-            border-radius: 8px;
-            font-size: 0.95rem;
-            outline: none;
-            transition: all 0.2s ease;
-        }
-        input[type="text"]:focus,
-        input[type="password"]:focus {
-            border-color: #3b82f6;
-            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
-        }
-        .checkbox-group {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
         }
-        .checkbox-group input[type="checkbox"] {
-            width: 16px;
-            height: 16px;
-            cursor: pointer;
-        }
-        .checkbox-group label {
-            margin-bottom: 0;
-            font-weight: 500;
-            cursor: pointer;
-        }
-        button {
-            width: 100%;
-            padding: 0.75rem;
-            background-color: #2563eb;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background-color 0.2s ease, transform 0.1s ease;
-        }
-        button:hover {
-            background-color: #1d4ed8;
-        }
-        button:active {
-            transform: scale(0.98);
-        }
-        .footer-links {
-            margin-top: 1.5rem;
-            text-align: center;
-        }
-        .footer-links a {
-            color: #2563eb;
-            text-decoration: none;
-            font-size: 0.875rem;
-            font-weight: 500;
-            transition: color 0.2s ease;
-        }
-        .footer-links a:hover {
-            color: #1d4ed8;
-            text-decoration: underline;
+        .login-card {
+            border-radius: 1rem;
+            box-shadow: 0 1rem 3rem rgba(0,0,0,0.1);
         }
     </style>
 </head>
 <body>
-    <div class="login-container">
-        <h2>Đăng Nhập</h2>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-5 col-xl-4">
+                <div class="card login-card border-0">
+                    <div class="card-body p-4 p-md-5">
+                        <div class="text-center mb-4">
+                            <h2 class="fw-bold text-dark"><i class="bi bi-box-arrow-in-right me-2 text-primary"></i>Đăng Nhập</h2>
+                        </div>
+                        
+                        <c:if test="${not empty alert}">
+                            <div class="alert ${alert.contains('thành công') ? 'alert-success' : 'alert-danger'} alert-dismissible fade show" role="alert">
+                                ${alert}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        </c:if>
 
-        <c:if test="${not empty alert}">
-            <div class="${alert.contains('thành công') ? 'alert-success' : 'alert-error'}">
-                ${alert}
-            </div>
-        </c:if>
+                        <form action="${pageContext.request.contextPath}/login" method="post" class="needs-validation" novalidate>
+                            <div class="mb-3">
+                                <label for="username" class="form-label fw-semibold">Tài khoản</label>
+                                <div class="input-group has-validation">
+                                    <span class="input-group-text"><i class="bi bi-person"></i></span>
+                                    <input type="text" class="form-control" id="username" name="username" placeholder="Nhập tài khoản..." required autocomplete="username" />
+                                    <div class="invalid-feedback">Vui lòng nhập tài khoản.</div>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="password" class="form-label fw-semibold">Mật khẩu</label>
+                                <div class="input-group has-validation">
+                                    <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                                    <input type="password" class="form-control" id="password" name="password" placeholder="Nhập mật khẩu..." required autocomplete="current-password" />
+                                    <div class="invalid-feedback">Vui lòng nhập mật khẩu.</div>
+                                </div>
+                            </div>
 
-        <form action="${pageContext.request.contextPath}/login" method="post">
-            <div class="form-group">
-                <label for="username">Tài khoản</label>
-                <input type="text" id="username" name="username" placeholder="Nhập tài khoản..." required autocomplete="username" />
+                            <div class="mb-4 d-flex justify-content-between align-items-center">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="remember" id="remember">
+                                    <label class="form-check-label user-select-none" for="remember">
+                                        Nhớ tài khoản
+                                    </label>
+                                </div>
+                                <a href="${pageContext.request.contextPath}/forgot-password" class="text-decoration-none small">Quên mật khẩu?</a>
+                            </div>
+                            
+                            <div class="d-grid mb-3">
+                                <button type="submit" class="btn btn-primary btn-lg fw-semibold">Đăng nhập</button>
+                            </div>
+                            
+                            <div class="text-center">
+                                <span class="text-muted small">Chưa có tài khoản?</span>
+                                <a href="${pageContext.request.contextPath}/register" class="text-decoration-none small fw-semibold">Đăng ký ngay</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="password">Mật khẩu</label>
-                <input type="password" id="password" name="password" placeholder="Nhập mật khẩu..." required autocomplete="current-password" />
-            </div>
-            <div class="checkbox-group">
-                <input type="checkbox" name="remember" id="remember" />
-                <label for="remember">Nhớ tài khoản</label>
-            </div>
-            <button type="submit">Đăng nhập</button>
-        </form>
-
-        <div class="footer-links">
-            <a href="${pageContext.request.contextPath}/register">Chưa có tài khoản? Đăng ký ngay</a>
-        </div>
-
-        <div style="text-align: center; margin-top: 15px;">
-            <a href="${pageContext.request.contextPath}/forgot-password" style="color: #667eea; text-decoration: none;">Quên mật khẩu?</a>
         </div>
     </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    
+    <!-- Form Validation Script -->
+    <script>
+        (() => {
+            'use strict'
+            const forms = document.querySelectorAll('.needs-validation')
+            Array.from(forms).forEach(form => {
+                form.addEventListener('submit', event => {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+                    form.classList.add('was-validated')
+                }, false)
+            })
+        })()
+    </script>
 </body>
 </html>

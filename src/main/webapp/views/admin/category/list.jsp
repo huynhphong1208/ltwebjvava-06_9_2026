@@ -1,194 +1,83 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Danh Sách Danh Mục</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Inter', sans-serif;
-        }
-        body {
-            background-color: #f8fafc;
-            color: #1e293b;
-            padding: 2.5rem;
-            display: flex;
-            justify-content: center;
-        }
-        .container {
-            width: 100%;
-            max-width: 900px;
-            background-color: #ffffff;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-        }
-        .header-section {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-            border-bottom: 1px solid #e2e8f0;
-            padding-bottom: 1rem;
-        }
-        h1 {
-            font-size: 1.75rem;
-            font-weight: 700;
-            color: #0f172a;
-        }
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0.625rem 1.25rem;
-            border-radius: 8px;
-            font-size: 0.875rem;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.2s ease;
-            cursor: pointer;
-        }
-        .btn-primary {
-            background-color: #2563eb;
-            color: #ffffff;
-        }
-        .btn-primary:hover {
-            background-color: #1d4ed8;
-        }
-        .btn-edit {
-            background-color: #f1f5f9;
-            color: #0f172a;
-            border: 1px solid #cbd5e1;
-            padding: 0.375rem 0.75rem;
-            font-size: 0.8rem;
-            margin-right: 0.5rem;
-        }
-        .btn-edit:hover {
-            background-color: #e2e8f0;
-        }
-        .btn-products {
-            background-color: #dbeafe;
-            color: #1d4ed8;
-            border: 1px solid #93c5fd;
-            padding: 0.375rem 0.75rem;
-            font-size: 0.8rem;
-            margin-right: 0.5rem;
-        }
-        .btn-delete {
-            background-color: #fee2e2;
-            color: #b91c1c;
-            border: 1px solid #fca5a5;
-            padding: 0.375rem 0.75rem;
-            font-size: 0.8rem;
-        }
-        .btn-delete:hover {
-            background-color: #fca5a5;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: left;
-            margin-top: 1rem;
-        }
-        th {
-            background-color: #f8fafc;
-            color: #64748b;
-            font-weight: 600;
-            font-size: 0.875rem;
-            text-transform: uppercase;
-            padding: 1rem;
-            border-bottom: 2px solid #e2e8f0;
-        }
-        td {
-            padding: 1rem;
-            border-bottom: 1px solid #e2e8f0;
-            color: #334155;
-            font-size: 0.95rem;
-            vertical-align: middle;
-        }
-        tr:hover td {
-            background-color: #f8fafc;
-        }
-        .img-preview {
-            width: 80px;
-            height: 80px;
-            object-fit: cover;
-            border-radius: 8px;
-            border: 1px solid #e2e8f0;
-        }
-        .no-img {
-            color: #94a3b8;
-            font-style: italic;
-            font-size: 0.875rem;
-        }
-        .action-links {
-            display: flex;
-            align-items: center;
-        }
-    </style>
-</head>
+<div class="container-fluid py-4">
+    <div class="card shadow-sm border-0 rounded-3">
+        <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center border-bottom-0">
+            <div>
+                <h4 class="mb-1 text-primary font-weight-bold">
+                    <i class="bi bi-grid-3x3-gap-fill me-2"></i>Danh Sách Danh Mục
+                </h4>
+                <p class="text-muted small mb-0">Quản lý phân loại danh mục sản phẩm</p>
+            </div>
+            <div>
+                <a class="btn btn-primary px-3 shadow-sm" href="${pageContext.request.contextPath}/admin/category/add">
+                    <i class="bi bi-plus-circle me-1"></i> Thêm danh mục
+                </a>
+            </div>
+        </div>
 
-<body>
-<div class="container">
-    <div class="header-section">
-        <h1>Danh Sách Danh Mục</h1>
-        <a class="btn btn-primary" href="${pageContext.request.contextPath}/admin/category/add">
-            + Thêm danh mục
-        </a>
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th class="ps-4" style="width: 10%;">ID</th>
+                            <th style="width: 35%;">Tên danh mục</th>
+                            <th style="width: 25%;">Hình ảnh</th>
+                            <th class="text-end pe-4" style="width: 30%;">Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach var="category" items="${categories}">
+                            <tr>
+                                <td class="ps-4 fw-bold text-secondary">#${category.cateId}</td>
+                                <td>
+                                    <span class="fw-semibold text-dark fs-6">${category.cateName}</span>
+                                </td>
+                                <td>
+                                    <c:choose>
+                                        <c:when test="${not empty category.icons}">
+                                            <img src="${pageContext.request.contextPath}/image?fname=${category.icons}"
+                                                 class="rounded border shadow-sm"
+                                                 style="width: 60px; height: 60px; object-fit: cover;"
+                                                 alt="${category.cateName}">
+                                        </c:when>
+                                        <c:otherwise>
+                                            <span class="badge bg-light text-muted border">
+                                                <i class="bi bi-image me-1"></i>Không có ảnh
+                                            </span>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </td>
+                                <td class="text-end pe-4">
+                                    <div class="btn-group shadow-sm" role="group">
+                                        <a class="btn btn-sm btn-outline-info" href="${pageContext.request.contextPath}/admin/product/list?cateId=${category.cateId}">
+                                            <i class="bi bi-box-seam me-1"></i>Sản phẩm
+                                        </a>
+                                        <a class="btn btn-sm btn-outline-warning" href="${pageContext.request.contextPath}/admin/category/edit?id=${category.cateId}">
+                                            <i class="bi bi-pencil me-1"></i>Sửa
+                                        </a>
+                                        <a class="btn btn-sm btn-outline-danger" href="${pageContext.request.contextPath}/admin/category/delete?id=${category.cateId}"
+                                           onclick="return confirm('Bạn có chắc muốn xóa danh mục [${category.cateName}] không?');">
+                                            <i class="bi bi-trash me-1"></i>Xóa
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                        <c:if test="${empty categories}">
+                            <tr>
+                                <td colspan="4" class="text-center py-5 text-muted">
+                                    <i class="bi bi-folder-x fs-1 d-block mb-2 text-secondary"></i>
+                                    Chưa có danh mục nào.
+                                </td>
+                            </tr>
+                        </c:if>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-
-    <table>
-        <thead>
-        <tr>
-            <th style="width: 10%;">ID</th>
-            <th style="width: 45%;">Tên danh mục</th>
-            <th style="width: 25%;">Hình ảnh</th>
-            <th style="width: 20%;">Hành động</th>
-        </tr>
-        </thead>
-
-        <tbody>
-        <c:forEach var="category" items="${categories}">
-            <tr>
-                <td><strong>${category.cateId}</strong></td>
-                <td>${category.cateName}</td>
-                <td>
-                    <c:if test="${not empty category.icons}">
-                        <img
-                            src="${pageContext.request.contextPath}/image?fname=${category.icons}"
-                            class="img-preview"
-                            alt="${category.cateName}"
-                        >
-                    </c:if>
-                    <c:if test="${empty category.icons}">
-                        <span class="no-img">Không có ảnh</span>
-                    </c:if>
-                </td>
-                <td>
-                    <div class="action-links">
-                        <a class="btn btn-products" href="${pageContext.request.contextPath}/admin/product/list?cateId=${category.cateId}">Sản phẩm</a>
-                        <a class="btn btn-edit" href="${pageContext.request.contextPath}/admin/category/edit?id=${category.cateId}">
-                            Sửa
-                        </a>
-                        <a class="btn btn-delete" href="${pageContext.request.contextPath}/admin/category/delete?id=${category.cateId}"
-                           onclick="return confirm('Bạn có chắc muốn xóa Category này không?');">
-                            Xóa
-                        </a>
-                    </div>
-                </td>
-            </tr>
-        </c:forEach>
-        </tbody>
-    </table>
 </div>
-</body>
-</html>
+

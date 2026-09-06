@@ -6,191 +6,108 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><sitemesh:write property="title"/></title>
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
         body {
             font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            background-color: #f1f5f9;
-            color: #0f172a;
+            background-color: #f8f9fa;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
         }
         .admin-navbar {
             background-color: #1e293b;
-            color: #ffffff;
-            padding: 0.85rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
         }
-        .admin-brand {
-            font-size: 1.25rem;
-            font-weight: 700;
+        .admin-navbar .navbar-brand, .admin-navbar .nav-link {
+            color: #f8fafc;
+        }
+        .admin-navbar .nav-link:hover {
             color: #38bdf8;
-            text-decoration: none;
-        }
-        .admin-links {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-        }
-        .admin-link {
-            color: #cbd5e1;
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
-        .admin-link:hover {
-            color: #ffffff;
         }
         .admin-body {
             flex: 1;
-            padding: 2rem;
-            max-width: 1200px;
-            width: 100%;
-            margin: 0 auto;
         }
         .admin-footer {
             background-color: #1e293b;
             color: #94a3b8;
-            padding: 1rem;
-            text-align: center;
-            font-size: 0.85rem;
-            margin-top: auto;
-        }
-        .content-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-        }
-        .content-header h2 {
-            font-size: 1.5rem;
-            color: #0f172a;
-        }
-        .table-container {
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            overflow: hidden;
-        }
-        .data-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        .data-table th, .data-table td {
-            padding: 1rem;
-            text-align: left;
-            border-bottom: 1px solid #e2e8f0;
-        }
-        .data-table th {
-            background-color: #f8fafc;
-            font-weight: 600;
-            color: #475569;
-        }
-        .data-table tr:hover {
-            background-color: #f8fafc;
-        }
-        .form-container {
-            background: white;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-            color: #374151;
-        }
-        .form-group input, .form-group select, .form-group textarea {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid #d1d5db;
-            border-radius: 6px;
-            font-size: 1rem;
-        }
-        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
-            outline: none;
-            border-color: #2563eb;
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-        }
-        .btn {
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            font-size: 0.875rem;
-            font-weight: 500;
-            text-decoration: none;
-            display: inline-block;
-            cursor: pointer;
-            border: none;
-        }
-        .btn-primary {
-            background-color: #2563eb;
-            color: white;
-        }
-        .btn-primary:hover {
-            background-color: #1d4ed8;
-        }
-        .btn-secondary {
-            background-color: #64748b;
-            color: white;
-        }
-        .btn-secondary:hover {
-            background-color: #475569;
-        }
-        .btn-warning {
-            background-color: #f59e0b;
-            color: white;
-        }
-        .btn-warning:hover {
-            background-color: #d97706;
-        }
-        .btn-danger {
-            background-color: #ef4444;
-            color: white;
-        }
-        .btn-danger:hover {
-            background-color: #dc2626;
-        }
-        .btn-sm {
-            padding: 0.25rem 0.5rem;
-            font-size: 0.75rem;
         }
     </style>
     <sitemesh:write property="head"/>
 </head>
 <body>
-    <header class="admin-navbar">
-        <a href="${pageContext.request.contextPath}/admin/category/list" class="admin-brand">
-            🛠️ Admin Portal
-        </a>
-        <div class="admin-links">
-            <a href="${pageContext.request.contextPath}/admin/category/list" class="admin-link">Danh sách Category</a>
-            <a href="${pageContext.request.contextPath}/admin/category/add" class="admin-link">Thêm Category</a>
-            <a href="${pageContext.request.contextPath}/admin/product/list" class="admin-link">Danh sách Product</a>
-            <a href="${pageContext.request.contextPath}/admin/category/list" class="admin-link">Chọn Category để thêm Product</a>
-            <a href="${pageContext.request.contextPath}/profile" class="admin-link">Profile</a>
-            <a href="${pageContext.request.contextPath}/waiting" class="admin-link">Trang chủ Client</a>
-            <a href="${pageContext.request.contextPath}/logout" class="admin-link">Đăng xuất</a>
+    <nav class="navbar navbar-expand-lg admin-navbar shadow-sm">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold text-info" href="${pageContext.request.contextPath}/admin/category/list">
+                <i class="bi bi-tools me-1"></i> Admin Portal
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#adminNavbar" aria-controls="adminNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="adminNavbar">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="${pageContext.request.contextPath}/admin/category/list">Danh sách Category</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="${pageContext.request.contextPath}/admin/category/add">Thêm Category</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="${pageContext.request.contextPath}/admin/product/list">Danh sách Product</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="${pageContext.request.contextPath}/profile"><i class="bi bi-person-circle"></i> Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="${pageContext.request.contextPath}/waiting"><i class="bi bi-house"></i> Trang chủ Client</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="${pageContext.request.contextPath}/logout"><i class="bi bi-box-arrow-right"></i> Đăng xuất</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </header>
+    </nav>
 
-    <main class="admin-body">
-        <sitemesh:write property="body"/>
+    <main class="admin-body py-4">
+        <div class="container">
+            <sitemesh:write property="body"/>
+        </div>
     </main>
 
-    <footer class="admin-footer">
-        &copy; 2026 Admin Dashboard - JPA Management
+    <footer class="admin-footer py-3 text-center mt-auto">
+        <div class="container">
+            <small>&copy; 2026 Admin Dashboard - JPA & SiteMesh 3 with Bootstrap</small>
+        </div>
     </footer>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    
+    <!-- Form Validation Script -->
+    <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (() => {
+            'use strict'
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            const forms = document.querySelectorAll('.needs-validation')
+            // Loop over them and prevent submission
+            Array.from(forms).forEach(form => {
+                form.addEventListener('submit', event => {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+                    form.classList.add('was-validated')
+                }, false)
+            })
+        })()
+    </script>
 </body>
 </html>

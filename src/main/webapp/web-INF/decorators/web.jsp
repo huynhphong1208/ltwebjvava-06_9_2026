@@ -6,60 +6,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><sitemesh:write property="title"/></title>
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
         body {
             font-family: 'Inter', system-ui, -apple-system, sans-serif;
             background-color: #f8fafc;
-            color: #1e293b;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
         }
         .header-navbar {
             background-color: #ffffff;
-            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-            padding: 0.85rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 50;
-        }
-        .brand-logo {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: #2563eb;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        .nav-items {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-        }
-        .nav-item-link {
-            color: #475569;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.95rem;
-            transition: color 0.2s ease;
-        }
-        .nav-item-link:hover {
-            color: #2563eb;
-        }
-        .user-profile-badge {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
         }
         .avatar-thumb {
             width: 36px;
@@ -68,95 +31,105 @@
             object-fit: cover;
             border: 2px solid #e2e8f0;
         }
-        .btn-action {
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            font-size: 0.875rem;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.2s ease;
-        }
-        .btn-primary {
-            background-color: #2563eb;
-            color: #ffffff;
-        }
-        .btn-primary:hover {
-            background-color: #1d4ed8;
-        }
-        .btn-outline {
-            background-color: #ffffff;
-            color: #475569;
-            border: 1px solid #cbd5e1;
-        }
-        .btn-outline:hover {
-            background-color: #f1f5f9;
-            color: #0f172a;
-        }
         .main-container {
             flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 2rem;
-            width: 100%;
-        }
-        .footer {
-            background-color: #ffffff;
-            border-top: 1px solid #e2e8f0;
-            padding: 1.5rem;
-            text-align: center;
-            color: #64748b;
-            font-size: 0.875rem;
-            margin-top: auto;
         }
     </style>
     <sitemesh:write property="head"/>
 </head>
 <body>
-    <header class="header-navbar">
-        <a href="${pageContext.request.contextPath}/waiting" class="brand-logo">
-            ⚡ WebApp Demo
-        </a>
-
-        <div class="nav-items">
-            <c:choose>
-                <c:when test="${sessionScope.account == null}">
-                    <a href="${pageContext.request.contextPath}/login" class="btn-action btn-primary">Đăng nhập</a>
-                    <a href="${pageContext.request.contextPath}/register" class="btn-action btn-outline">Đăng ký</a>
-                </c:when>
-                <c:otherwise>
-                    <a href="${pageContext.request.contextPath}/waiting" class="nav-item-link">Trang chủ</a>
-                    <a href="${pageContext.request.contextPath}/product" class="nav-item-link">Sản phẩm</a>
-                    <c:if test="${sessionScope.account.roleid == 1}">
-                        <a href="${pageContext.request.contextPath}/admin/category/list" class="nav-item-link">Quản lý Category</a>
-                        <a href="${pageContext.request.contextPath}/admin/product/list" class="nav-item-link">Quản lý Product</a>
-                    </c:if>
-                    <a href="${pageContext.request.contextPath}/profile" class="nav-item-link">Hồ sơ cá nhân</a>
-                    
-                    <div class="user-profile-badge">
-                        <c:choose>
-                            <c:when test="${not empty sessionScope.account.avatar}">
-                                <img src="${pageContext.request.contextPath}/image?fname=${sessionScope.account.avatar}" alt="Avatar" class="avatar-thumb">
-                            </c:when>
-                            <c:otherwise>
-                                <img src="https://ui-avatars.com/api/?name=${sessionScope.account.fullName}&background=2563eb&color=fff" alt="Avatar" class="avatar-thumb">
-                            </c:otherwise>
-                        </c:choose>
-                        <span style="font-weight: 600; font-size: 0.9rem;">${sessionScope.account.fullName}</span>
-                    </div>
-
-                    <a href="${pageContext.request.contextPath}/logout" class="btn-action btn-outline">Đăng xuất</a>
-                </c:otherwise>
-            </c:choose>
+    <nav class="navbar navbar-expand-lg header-navbar sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-primary" href="${pageContext.request.contextPath}/waiting">
+                <i class="bi bi-lightning-charge-fill text-warning"></i> WebApp Demo
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#webNavbar" aria-controls="webNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="webNavbar">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <c:choose>
+                        <c:when test="${sessionScope.account == null}">
+                            <li class="nav-item me-2">
+                                <a href="${pageContext.request.contextPath}/login" class="btn btn-primary">Đăng nhập</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="${pageContext.request.contextPath}/register" class="btn btn-outline-secondary">Đăng ký</a>
+                            </li>
+                        </c:when>
+                        <c:otherwise>
+                            <li class="nav-item">
+                                <a href="${pageContext.request.contextPath}/waiting" class="nav-link">Trang chủ</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="${pageContext.request.contextPath}/product" class="nav-link">Sản phẩm</a>
+                            </li>
+                            <c:if test="${sessionScope.account.roleid == 1}">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Quản trị
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin/category/list">Quản lý Category</a></li>
+                                        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin/product/list">Quản lý Product</a></li>
+                                    </ul>
+                                </li>
+                            </c:if>
+                            <li class="nav-item">
+                                <a href="${pageContext.request.contextPath}/profile" class="nav-link">Hồ sơ cá nhân</a>
+                            </li>
+                            <li class="nav-item ms-3 d-flex align-items-center">
+                                <c:choose>
+                                    <c:when test="${not empty sessionScope.account.avatar}">
+                                        <img src="${pageContext.request.contextPath}/image?fname=${sessionScope.account.avatar}" alt="Avatar" class="avatar-thumb me-2">
+                                    </c:when>
+                                    <c:otherwise>
+                                        <img src="https://ui-avatars.com/api/?name=${sessionScope.account.fullName}&background=2563eb&color=fff" alt="Avatar" class="avatar-thumb me-2">
+                                    </c:otherwise>
+                                </c:choose>
+                                <span class="fw-semibold text-dark me-3">${sessionScope.account.fullName}</span>
+                                <a href="${pageContext.request.contextPath}/logout" class="btn btn-sm btn-outline-danger">Đăng xuất</a>
+                            </li>
+                        </c:otherwise>
+                    </c:choose>
+                </ul>
+            </div>
         </div>
-    </header>
+    </nav>
 
-    <main class="main-container">
-        <sitemesh:write property="body"/>
+    <main class="main-container py-5">
+        <div class="container">
+            <sitemesh:write property="body"/>
+        </div>
     </main>
 
-    <footer class="footer">
-        &copy; 2026 WebApp Demo - Quản lý JPA & SiteMesh Decorator
+    <footer class="bg-white border-top py-4 text-center mt-auto text-secondary">
+        <div class="container">
+            <small>&copy; 2026 WebApp Demo - JPA & SiteMesh 3 with Bootstrap</small>
+        </div>
     </footer>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    
+    <!-- Form Validation Script -->
+    <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (() => {
+            'use strict'
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            const forms = document.querySelectorAll('.needs-validation')
+            // Loop over them and prevent submission
+            Array.from(forms).forEach(form => {
+                form.addEventListener('submit', event => {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+                    form.classList.add('was-validated')
+                }, false)
+            })
+        })()
+    </script>
 </body>
 </html>
