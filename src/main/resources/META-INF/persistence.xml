@@ -10,7 +10,8 @@
 
         <class>com.example.demobtvenha25_8.model.Category</class>
         <class>com.example.demobtvenha25_8.model.User</class>
-
+        <class>com.example.demobtvenha25_8.model.Otp</class>
+        <class>com.example.demobtvenha25_8.model.Product</class>
         <properties>
             <!-- Database Connection Settings -->
             <property name="jakarta.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>

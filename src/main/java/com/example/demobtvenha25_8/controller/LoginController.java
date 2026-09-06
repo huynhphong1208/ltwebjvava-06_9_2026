@@ -61,17 +61,22 @@ public class LoginController extends HttpServlet {
             return;
         }
 
-        User user = userService.login(username, password);
-        if (user != null) {
-            HttpSession session = req.getSession(true);
-            session.setAttribute("account", user);
+        try {
+            User user = userService.login(username, password);
+            if (user != null) {
+                HttpSession session = req.getSession(true);
+                session.setAttribute("account", user);
 
-            if (isRememberMe) {
-                saveRememberMe(resp, username);
+                if (isRememberMe) {
+                    saveRememberMe(resp, username);
+                }
+                resp.sendRedirect(req.getContextPath() + "/waiting");
+            } else {
+                req.setAttribute("alert", "Tài khoản hoặc mật khẩu không đúng");
+                req.getRequestDispatcher("/views/login.jsp").forward(req, resp);
             }
-            resp.sendRedirect(req.getContextPath() + "/waiting");
-        } else {
-            req.setAttribute("alert", "Tài khoản hoặc mật khẩu không đúng");
+        } catch (RuntimeException e) {
+            req.setAttribute("alert", e.getMessage());
             req.getRequestDispatcher("/views/login.jsp").forward(req, resp);
         }
     }

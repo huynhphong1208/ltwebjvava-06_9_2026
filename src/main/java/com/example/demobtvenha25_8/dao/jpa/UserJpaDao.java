@@ -7,4 +7,5 @@ public interface UserJpaDao {
     User save(User user);
     User update(User user);
     boolean existsByUsername(String username);
+    User findByEmail(String email);
 }

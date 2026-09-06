@@ -126,8 +126,10 @@
                 </c:when>
                 <c:otherwise>
                     <a href="${pageContext.request.contextPath}/waiting" class="nav-item-link">Trang chủ</a>
+                    <a href="${pageContext.request.contextPath}/product" class="nav-item-link">Sản phẩm</a>
                     <c:if test="${sessionScope.account.roleid == 1}">
                         <a href="${pageContext.request.contextPath}/admin/category/list" class="nav-item-link">Quản lý Category</a>
+                        <a href="${pageContext.request.contextPath}/admin/product/list" class="nav-item-link">Quản lý Product</a>
                     </c:if>
                     <a href="${pageContext.request.contextPath}/profile" class="nav-item-link">Hồ sơ cá nhân</a>
                     

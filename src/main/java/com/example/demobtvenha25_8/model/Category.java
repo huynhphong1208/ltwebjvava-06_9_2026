@@ -6,6 +6,10 @@ import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Column;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.FetchType;
+import java.util.List;
 
 @Entity
 @Table(name = "Category")
@@ -24,7 +28,9 @@ public class Category {
 
     public Category() {
     }
-
+    // Thêm field sau các field hiện tại
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Product> products;
     public Category(int cateId, String cateName, String icons) {
         this.cateId = cateId;
         this.cateName = cateName;
@@ -60,6 +66,9 @@ public class Category {
         this.icons = icons;
     }
 
+    // Thêm getter và setter
+    public List<Product> getProducts() { return products; }
+    public void setProducts(List<Product> products) { this.products = products; }
     @Override
     public String toString() {
         return "Category{" +

@@ -75,4 +75,17 @@ public class UserJpaDaoImpl implements UserJpaDao {
             em.close();
         }
     }
+    @Override
+    public User findByEmail(String email) {
+        EntityManager em = JPAConfig.getEntityManager();
+        try {
+            TypedQuery<User> query = em.createQuery(
+                    "SELECT u FROM User u WHERE u.email = :email", User.class);
+            query.setParameter("email", email);
+            List<User> results = query.getResultList();
+            return results.isEmpty() ? null : results.get(0);
+        } finally {
+            em.close();
+        }
+    }
 }

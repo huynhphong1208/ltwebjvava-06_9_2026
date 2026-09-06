@@ -165,6 +165,10 @@
         <div class="footer-links">
             <a href="${pageContext.request.contextPath}/register">Chưa có tài khoản? Đăng ký ngay</a>
         </div>
+
+        <div style="text-align: center; margin-top: 15px;">
+            <a href="${pageContext.request.contextPath}/forgot-password" style="color: #667eea; text-decoration: none;">Quên mật khẩu?</a>
+        </div>
     </div>
 </body>
 </html>

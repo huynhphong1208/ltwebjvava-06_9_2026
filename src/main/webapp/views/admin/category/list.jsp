@@ -75,6 +75,14 @@
         .btn-edit:hover {
             background-color: #e2e8f0;
         }
+        .btn-products {
+            background-color: #dbeafe;
+            color: #1d4ed8;
+            border: 1px solid #93c5fd;
+            padding: 0.375rem 0.75rem;
+            font-size: 0.8rem;
+            margin-right: 0.5rem;
+        }
         .btn-delete {
             background-color: #fee2e2;
             color: #b91c1c;
@@ -167,6 +175,7 @@
                 </td>
                 <td>
                     <div class="action-links">
+                        <a class="btn btn-products" href="${pageContext.request.contextPath}/admin/product/list?cateId=${category.cateId}">Sản phẩm</a>
                         <a class="btn btn-edit" href="${pageContext.request.contextPath}/admin/category/edit?id=${category.cateId}">
                             Sửa
                         </a>
